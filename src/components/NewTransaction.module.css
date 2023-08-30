@@ -1,0 +1,31 @@
+.form {
+  margin-top: 20px;
+}
+.formInput {
+  width: 100%;
+  background-color: transparent;
+  color: #ddd;
+  border: 2px solid #30313d;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+.formInputDate {
+  color: #777;
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #30313d;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+.basic {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+.formButton {
+  width: 100%;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}

@@ -1,0 +1,29 @@
+.transaction {
+  display: flex;
+  padding: 5px 0;
+  justify-content: space-between;
+  border-top: 1px solid #30313d;
+}
+.transaction:first-child {
+  border: none;
+}
+.transactionName {
+  font-size: 1rem;
+}
+.transactionDescription {
+  font-size: 0.7rem;
+  color: #888;
+}
+.transactionRight {
+  text-align: right;
+}
+.transactionPriceIncome {
+  color: #1c1c;
+}
+.transactionPriceExpense {
+  color: #c11;
+}
+.transactionDateTime {
+  font-size: 0.7rem;
+  color: #888;
+}
