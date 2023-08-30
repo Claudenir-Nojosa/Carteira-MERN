@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import classes from "./NewTransaction.module.css";
-
+import { LinearGradient } from "react-text-gradients";
 
 const NewTransaction = () => {
   const [formInput, setFormInput] = useState({
@@ -98,7 +98,14 @@ const NewTransaction = () => {
           Adicionar nova Transação
         </button>
       </form>
-      <h3 className={classes.budget}>Sua carteira atual</h3>
+
+      <h3 className={classes.budget}>
+        <LinearGradient
+          gradient={["to right", "#010101, #0f0f0f"]}
+        >
+          Sua carteira atual{" "}
+        </LinearGradient>
+      </h3>
     </>
   );
 };

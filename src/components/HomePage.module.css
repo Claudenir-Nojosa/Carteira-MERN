@@ -2,12 +2,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 3rem 0 1rem 0;
 }
 .title{
   font-size: 3rem;
 }
 .paragraph {
-  color: #888;
+  color: #666565;
   padding: 6px;
   font-size: 1.5rem;
 }
@@ -23,4 +24,5 @@
   padding: 5px;
   font-size: 14px;
   font-weight: bold;
+  background: linear-gradient(135deg, #a7b2cf , #667db6);
 }
