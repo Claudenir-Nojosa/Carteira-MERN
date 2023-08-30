@@ -3,13 +3,16 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Transaction.module.css";
 
-const Transaction = ({ name, description, price, date }) => {
+const Transaction = ({ name, description, price, date, onDelete }) => {
   const [priceIsPositive, setPriceIsPositive] = useState(false);
 
   useEffect(() => {
     setPriceIsPositive(price > 0);
   }, [price]);
 
+  const handleDeleteClick = (_id) => {
+    onDelete(_id);
+  };
   return (
     <div className={classes.transaction}>
       <div className={classes.transactionLeft}>
@@ -23,6 +26,7 @@ const Transaction = ({ name, description, price, date }) => {
               ? classes.transactionPriceIncome
               : classes.transactionPriceExpense
           }`}
+          onClick={handleDeleteClick}
         >
           R${price.toFixed(2)}{" "}
         </div>

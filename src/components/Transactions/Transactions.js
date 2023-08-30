@@ -52,6 +52,24 @@ const Transactions = () => {
     setFilterType(event.target.value);
   };
 
+  const handleDeleteTransaction = async (id) => {
+    const url = `${process.env.NEXT_PUBLIC_API_URL}transactions/${id}`;
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        const updatedTransactions = transactions.filter(
+          (transaction) => transaction._id !== id
+        );
+        setTransactions(updatedTransactions);
+      } else {
+        console.error("Erro ao excluir transação.");
+      }
+    } catch (error) {
+      console.error("Erro ao excluir transação:", error);
+    }
+  };
   return (
     <div className={classes.container}>
       <div className={classes.filterContainer}>
@@ -82,6 +100,7 @@ const Transactions = () => {
             description={transaction.description}
             price={transaction.price}
             date={formatDate(transaction.date)}
+            onDelete={() => handleDeleteTransaction(transaction._id)}
           />
         ))}
     </div>

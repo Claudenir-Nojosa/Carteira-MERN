@@ -71,3 +71,10 @@
   padding-right: 0.7rem;
   font-size: 2rem;
 }
+.advice {
+  text-align: center;
+  padding-bottom: 0.6rem;
+  color: #777;
+  font-weight: bold;
+  font-size: 0.91rem;
+}

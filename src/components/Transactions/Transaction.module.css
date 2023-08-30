@@ -3,6 +3,7 @@
   padding: 1rem 0;
   justify-content: space-between;
   border-top: 0.5px solid #30313d;
+  align-items: center;
 }
 .transaction:first-child {
   border: none;
@@ -21,10 +22,12 @@
 .transactionPriceIncome {
   color: #1c1c;
   font-size: 1.4rem;
+  cursor: pointer;
 }
 .transactionPriceExpense {
   color: #c11;
   font-size: 1.4rem;
+  cursor: pointer;
 }
 .transactionDateTime {
   font-size: 1rem;

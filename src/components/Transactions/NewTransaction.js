@@ -100,12 +100,11 @@ const NewTransaction = () => {
       </form>
 
       <h3 className={classes.budget}>
-        <LinearGradient
-          gradient={["to right", "#010101, #0f0f0f"]}
-        >
-          Sua carteira atual{" "}
+        <LinearGradient gradient={["to right", "#010101, #0f0f0f"]}>
+          Sua carteira atual
         </LinearGradient>
       </h3>
+      <p className={classes.advice}>Para excluir, basta clicar em cima do valor.</p>
     </>
   );
 };
