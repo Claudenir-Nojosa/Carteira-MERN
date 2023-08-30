@@ -15,3 +15,12 @@
   font-size: 0.74rem;
   padding-top: 1.4rem;
 }
+.logOut{
+  width: 10rem;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}

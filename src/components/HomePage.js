@@ -1,7 +1,7 @@
 import React from "react";
 import NewTransaction from "./NewTransaction";
 import Transactions from "./Transactions";
-import classes from './HomePage.module.css';
+import classes from "./HomePage.module.css";
 
 const HomePage = () => {
   return (
@@ -9,6 +9,7 @@ const HomePage = () => {
       <div className={classes.main}>
         <h1 className={classes.title}>Moneyblow</h1>
         <p className={classes.paragraph}>Controle Financeiro</p>
+        <button className={classes.logOut}>Fazer Logout</button>
         <p className={classes.paragraph}>Insira abaixo a sua Receita/Despesa</p>
       </div>
       <NewTransaction />
