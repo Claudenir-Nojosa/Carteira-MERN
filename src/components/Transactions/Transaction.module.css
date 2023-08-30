@@ -1,29 +1,32 @@
 .transaction {
   display: flex;
-  padding: 5px 0;
+  padding: 1rem 0;
   justify-content: space-between;
-  border-top: 1px solid #30313d;
+  border-top: 0.5px solid #30313d;
 }
 .transaction:first-child {
   border: none;
 }
 .transactionName {
-  font-size: 1rem;
+  font-size: 1.6rem;
 }
 .transactionDescription {
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: #888;
+  padding: 0.5rem 0;
 }
 .transactionRight {
   text-align: right;
 }
 .transactionPriceIncome {
   color: #1c1c;
+  font-size: 1.4rem;
 }
 .transactionPriceExpense {
   color: #c11;
+  font-size: 1.4rem;
 }
 .transactionDateTime {
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: #888;
 }

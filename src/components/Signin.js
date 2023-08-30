@@ -1,12 +1,20 @@
 import React from "react";
 import classes from "./Signin.module.css";
 import Link from "next/link";
+import { LinearGradient } from "react-text-gradients";
 
 const Signin = () => {
   return (
     <div className={classes.container}>
       <form className={classes.form}>
-        <h1 className={classes.heading}>Faça o Cadastro</h1>
+        <h1 className={classes.heading}>
+          {" "}
+          <LinearGradient
+            gradient={["to left", "#667db6 ,#0082c8, #0082c8, #667db6"]}
+          >
+            Faça o Cadastro
+          </LinearGradient>
+        </h1>
         <div className={classes.inputGroup}>
           <label htmlFor="email" className={classes.label}>
             E-mail
@@ -41,7 +49,10 @@ const Signin = () => {
           />
         </div>
         <button type="submit" className={classes.button}>
-          <Link href='/'>Realizar Cadastro</Link>
+          <Link href="/">Realizar Cadastro</Link>
+        </button>
+        <button className={classes.voltarLogin}>
+          <Link href="/">Voltar para Login</Link>
         </button>
       </form>
     </div>

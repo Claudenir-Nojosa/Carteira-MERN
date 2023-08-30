@@ -53,16 +53,24 @@ const Transactions = () => {
   };
 
   return (
-    <>
+    <div className={classes.container}>
       <div className={classes.filterContainer}>
         <label>Filtrar por:</label>
-        <select value={filterType} onChange={handleFilterChange}>
+        <select
+          value={filterType}
+          onChange={handleFilterChange}
+          className={classes.option}
+        >
           <option value="all">Todos</option>
-          <option value="positive">Positivos</option>
-          <option value="negative">Negativos</option>
+          <option value="positive">Receitas</option>
+          <option value="negative">Despesas</option>
         </select>
       </div>
-      <h1 className={`${classes.value} ${balance > 0 ? classes.valuePositive : classes.valueNegative}`}>
+      <h1
+        className={`${classes.value} ${
+          balance > 0 ? classes.valuePositive : classes.valueNegative
+        }`}
+      >
         {balance}
         <span className={classes.span}>{cents}</span>
       </h1>
@@ -76,7 +84,7 @@ const Transactions = () => {
             date={formatDate(transaction.date)}
           />
         ))}
-    </>
+    </div>
   );
 };
 
