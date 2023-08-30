@@ -7,8 +7,8 @@ const NewTransaction = () => {
     name: "",
     description: "",
     date: "",
+    price: 0,
   });
-
   const handleNameInputChange = (event) => {
     setFormInput({
       ...formInput,
@@ -27,14 +27,22 @@ const NewTransaction = () => {
       date: event.target.value,
     });
   };
+  const handlePriceInputChange = (event) => {
+    setFormInput({
+      ...formInput,
+      price: event.target.value,
+    });
+  };
   const submitHandler = (event) => {
     event.preventDefault();
     const url = process.env.NEXT_PUBLIC_API_URL + "transaction";
+
     fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: formInput.name,
+        price: formInput.price,
         description: formInput.description,
         date: formInput.date,
       }),
@@ -42,6 +50,12 @@ const NewTransaction = () => {
       response.json().then((json) => {
         console.log("result", json);
       });
+    });
+    setFormInput({
+      name: "",
+      price: 0,
+      description: "",
+      date: "",
     });
   };
 
@@ -54,6 +68,13 @@ const NewTransaction = () => {
           placeholder="Movimentação"
           onChange={handleNameInputChange}
           value={formInput.name}
+        />
+        <input
+          className={classes.formInput}
+          type="number"
+          placeholder="Valor"
+          onChange={handlePriceInputChange}
+          value={formInput.price}
         />
         <input
           className={classes.formInputDate}
