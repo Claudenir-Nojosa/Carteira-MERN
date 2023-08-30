@@ -17,6 +17,15 @@
   padding: 2px 5px;
   border-radius: 5px;
 }
+.formInputNumber {
+  color: #ddd;
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #30313d;
+  padding: 2px 5px;
+  border-radius: 5px;
+  appearance: none;
+}
 .basic {
   display: flex;
   gap: 5px;
@@ -28,4 +37,10 @@
   border: none;
   border-radius: 5px;
   padding: 5px;
+}
+.budget {
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.7rem;
 }

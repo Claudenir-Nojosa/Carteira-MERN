@@ -40,12 +40,6 @@ const Transactions = () => {
             date={transaction.date}
           />
         ))}
-      <Transaction
-        name={"Salário"}
-        description={"Accord Contabilidade"}
-        price={2000}
-        date={"29/08/2023"}
-      />
     </>
   );
 };

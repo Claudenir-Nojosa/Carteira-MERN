@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.title{
+  font-size: 3rem;
+}
+.paragraph {
+  color: #888;
+  padding: 6px;
+  font-size: 1.5rem;
+}
+.paragraph:last-child {
+  font-size: 0.74rem;
+  padding-top: 1.4rem;
+}

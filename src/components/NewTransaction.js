@@ -7,7 +7,7 @@ const NewTransaction = () => {
     name: "",
     description: "",
     date: "",
-    price: 0,
+    price: "",
   });
   const handleNameInputChange = (event) => {
     setFormInput({
@@ -53,51 +53,54 @@ const NewTransaction = () => {
     });
     setFormInput({
       name: "",
-      price: 0,
+      price: "",
       description: "",
       date: "",
     });
   };
 
   return (
-    <form onSubmit={submitHandler} className={classes.form}>
-      <div className={classes.basic}>
-        <input
-          className={classes.formInput}
-          type="text"
-          placeholder="Movimentação"
-          onChange={handleNameInputChange}
-          value={formInput.name}
-        />
-        <input
-          className={classes.formInput}
-          type="number"
-          placeholder="Valor"
-          onChange={handlePriceInputChange}
-          value={formInput.price}
-        />
-        <input
-          className={classes.formInputDate}
-          type="date"
-          onChange={handleDateInputChange}
-          value={formInput.date}
-        />
-      </div>
-      <div
-        className={classes.description}
-        onChange={handleDescriptionInputChange}
-        value={formInput.description}
-      >
-        <input
-          className={classes.formInput}
-          type="text"
-          placeholder="Descrição"
-        />
-      </div>
-      <button className={classes.formButton} type="submit">
-        Adicionar nova Transação
-      </button>
-    </form>
+    <>
+      <form onSubmit={submitHandler} className={classes.form}>
+        <div className={classes.basic}>
+          <input
+            className={classes.formInput}
+            type="text"
+            placeholder="Movimentação"
+            onChange={handleNameInputChange}
+            value={formInput.name}
+          />
+          <input
+            className={classes.formInput}
+            type="number"
+            placeholder="Valor"
+            onChange={handlePriceInputChange}
+            value={formInput.price}
+          />
+          <input
+            className={classes.formInputDate}
+            type="date"
+            onChange={handleDateInputChange}
+            value={formInput.date}
+          />
+        </div>
+        <div
+          className={classes.description}
+          onChange={handleDescriptionInputChange}
+          value={formInput.description}
+        >
+          <input
+            className={classes.formInput}
+            type="text"
+            placeholder="Descrição"
+          />
+        </div>
+        <button className={classes.formButton} type="submit">
+          Adicionar nova Transação
+        </button>
+      </form>
+      <h3 className={classes.budget}>Sua carteira atual</h3>
+    </>
   );
 };
 
