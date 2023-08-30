@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import classes from "./NewTransaction.module.css";
 
+
 const NewTransaction = () => {
   const [formInput, setFormInput] = useState({
     name: "",
@@ -84,14 +85,12 @@ const NewTransaction = () => {
             value={formInput.date}
           />
         </div>
-        <div
-          className={classes.description}
-          onChange={handleDescriptionInputChange}
-          value={formInput.description}
-        >
+        <div className={classes.description}>
           <input
             className={classes.formInput}
             type="text"
+            onChange={handleDescriptionInputChange}
+            value={formInput.description}
             placeholder="Descrição"
           />
         </div>

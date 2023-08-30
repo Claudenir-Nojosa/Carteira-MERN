@@ -2,8 +2,14 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Transactions.module.css";
 import Transaction from "./Transaction";
+import { format } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
+  const [filterType, setFilterType] = useState("all");
+  const [balance, setBalance] = useState("0.00");
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   useEffect(() => {
     getTransactions().then(setTransactions);
@@ -15,29 +21,59 @@ const Transactions = () => {
     return await response.json();
   }
 
-  let balance = 0;
-  for (const transaction of transactions) {
-    balance += transaction.price;
-  }
+  useEffect(() => {
+    const updatedFilteredTransactions = transactions.filter((transaction) => {
+      if (filterType === "positive") {
+        return transaction.price > 0;
+      } else if (filterType === "negative") {
+        return transaction.price < 0;
+      } else {
+        return true;
+      }
+    });
 
-  balance = balance.toFixed(2);
+    setFilteredTransactions(updatedFilteredTransactions);
+
+    let updatedBalance = 0;
+    for (const transaction of updatedFilteredTransactions) {
+      updatedBalance += transaction.price;
+    }
+    setBalance(updatedBalance.toFixed(2));
+  }, [filterType, transactions]);
 
   const cents = balance.split(".")[1];
 
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return format(date, "dd/MM/yyyy", { locale: ptBR });
+  };
+
+  const handleFilterChange = (event) => {
+    setFilterType(event.target.value);
+  };
+
   return (
     <>
-      <h1 className={classes.value}>
+      <div className={classes.filterContainer}>
+        <label>Filtrar por:</label>
+        <select value={filterType} onChange={handleFilterChange}>
+          <option value="all">Todos</option>
+          <option value="positive">Positivos</option>
+          <option value="negative">Negativos</option>
+        </select>
+      </div>
+      <h1 className={`${classes.value} ${balance > 0 ? classes.valuePositive : classes.valueNegative}`}>
         {balance}
         <span className={classes.span}>{cents}</span>
       </h1>
-      {transactions.length > 0 &&
-        transactions.map((transaction) => (
+      {filteredTransactions.length > 0 &&
+        filteredTransactions.map((transaction) => (
           <Transaction
             key={transaction._id}
             name={transaction.name}
             description={transaction.description}
             price={transaction.price}
-            date={transaction.date}
+            date={formatDate(transaction.date)}
           />
         ))}
     </>
