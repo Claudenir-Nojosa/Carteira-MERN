@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import classes from "./NewTransaction.module.css";
 import { LinearGradient } from "react-text-gradients";
 
 const NewTransaction = () => {
@@ -70,51 +69,43 @@ const NewTransaction = () => {
 
   return (
     <>
-      <form onSubmit={submitHandler} className={classes.form}>
-        <div className={classes.basic}>
+      <form onSubmit={submitHandler}>
+        <div>
           <input
-            className={classes.formInput}
             type="text"
             placeholder="Movimentação"
             onChange={handleNameInputChange}
             value={formInput.name}
           />
           <input
-            className={classes.formInput}
             type="number"
             placeholder="Valor"
             onChange={handlePriceInputChange}
             value={formInput.price}
           />
           <input
-            className={classes.formInputDate}
             type="date"
             onChange={handleDateInputChange}
             value={formInput.date}
           />
         </div>
-        <div className={classes.description}>
+        <div>
           <input
-            className={classes.formInputDescription}
             type="text"
             onChange={handleDescriptionInputChange}
             value={formInput.description}
             placeholder="Descrição"
           />
         </div>
-        <button className={classes.formButton} type="submit">
-          Adicionar nova Transação
-        </button>
+        <button type="submit">Adicionar nova Transação</button>
       </form>
 
-      <h3 className={classes.budget}>
+      <h3>
         <LinearGradient gradient={["to right", "#010101, #0f0f0f"]}>
           Sua carteira atual
         </LinearGradient>
       </h3>
-      <p className={classes.advice}>
-        Para excluir, basta clicar em cima do valor.
-      </p>
+      <p>Para excluir, basta clicar em cima do valor.</p>
     </>
   );
 };

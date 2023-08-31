@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import classes from "./Transactions.module.css";
 import Transaction from "./Transaction";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
@@ -71,26 +70,18 @@ const Transactions = () => {
     }
   };
   return (
-    <div className={classes.container}>
-      <div className={classes.filterContainer}>
+    <div>
+      <div>
         <label>Filtrar por:</label>
-        <select
-          value={filterType}
-          onChange={handleFilterChange}
-          className={classes.option}
-        >
+        <select value={filterType} onChange={handleFilterChange}>
           <option value="all">Todos</option>
           <option value="positive">Receitas</option>
           <option value="negative">Despesas</option>
         </select>
       </div>
-      <h1
-        className={` ${classes.value} ${
-          balance > 0 ? classes.valuePositive : classes.valueNegative
-        }`}
-      >
+      <h1>
         {balance}
-        <span className={classes.span}>{cents}</span>
+        <span>{cents}</span>
       </h1>
       {filteredTransactions.length > 0 &&
         filteredTransactions.map((transaction) => (

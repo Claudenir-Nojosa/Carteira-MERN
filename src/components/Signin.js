@@ -1,13 +1,12 @@
 import React from "react";
-import classes from "./Signin.module.css";
 import Link from "next/link";
 import { LinearGradient } from "react-text-gradients";
 
 const Signin = () => {
   return (
-    <div className={classes.container}>
-      <form className={classes.form}>
-        <h1 className={classes.heading}>
+    <div>
+      <form>
+        <h1>
           {" "}
           <LinearGradient
             gradient={["to left", "#667db6 ,#0082c8, #0082c8, #667db6"]}
@@ -15,43 +14,22 @@ const Signin = () => {
             Faça o Cadastro
           </LinearGradient>
         </h1>
-        <div className={classes.inputGroup}>
-          <label htmlFor="email" className={classes.label}>
-            E-mail
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="E-mail"
-            className={classes.input}
-          />
+        <div>
+          <label htmlFor="email">E-mail</label>
+          <input id="email" type="email" placeholder="E-mail" />
         </div>
-        <div className={classes.inputGroup}>
-          <label htmlFor="password" className={classes.label}>
-            Senha
-          </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Senha"
-            className={classes.input}
-          />
+        <div>
+          <label htmlFor="password">Senha</label>
+          <input id="password" type="password" placeholder="Senha" />
         </div>
-        <div className={classes.inputGroup}>
-          <label htmlFor="password" className={classes.label}>
-            Confirmação de Senha
-          </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Confirmar Senha"
-            className={classes.input}
-          />
+        <div>
+          <label htmlFor="password">Confirmação de Senha</label>
+          <input id="password" type="password" placeholder="Confirmar Senha" />
         </div>
-        <button type="submit" className={classes.button}>
+        <button type="submit">
           <Link href="/">Realizar Cadastro</Link>
         </button>
-        <button className={classes.voltarLogin}>
+        <button>
           <Link href="/">Voltar para Login</Link>
         </button>
       </form>
