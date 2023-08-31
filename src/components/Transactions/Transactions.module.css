@@ -4,9 +4,10 @@
   max-width: 80%;
   margin: 0 auto;
   border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   padding: 1rem 3rem;
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 .filterContainer {
   display: flex;
@@ -41,4 +42,22 @@
 }
 .option {
   margin-left: 1rem;
+}
+
+@media (max-width: 768px) {
+  .filterContainer {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .value {
+    font-size: 2rem;
+    margin-top: 1.5rem;
+  }
+  .span {
+    font-size: 1rem;
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 0px;
+  }
 }

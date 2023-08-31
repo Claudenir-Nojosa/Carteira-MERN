@@ -5,8 +5,14 @@ require("dotenv").config();
 const Transaction = require("./models/transaction");
 const mongoose = require("mongoose");
 
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 app.use(cors());
 app.use(express.json());
+
 app.get("/api/test", (req, res) => {
   res.json({ message: "Test ok" });
 });
@@ -19,19 +25,39 @@ app.post("/api/transaction", async (req, res) => {
     description,
     date,
     price,
-    _id
   });
   res.json(transaction);
 });
 
+app.get("/api/test", (req, res) => {
+  res.json({ message: "Test ok" });
+});
+
+app.post("/api/transaction", async (req, res) => {
+  const { name, description, date, price } = req.body;
+  try {
+    const transaction = await Transaction.create({
+      name,
+      description,
+      date,
+      price,
+    });
+    res.json(transaction);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao criar transação." });
+  }
+});
+
 app.get("/api/transactions", async (req, res) => {
-  await mongoose.connect(process.env.MONGO_URL);
-  const transactions = await Transaction.find();
-  res.json(transactions);
+  try {
+    const transactions = await Transaction.find();
+    res.json(transactions);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao obter transações." });
+  }
 });
 
 app.delete("/api/transactions/:id", async (req, res) => {
-  await mongoose.connect(process.env.MONGO_URL);
   const transactionId = req.params.id;
   try {
     const deletedTransaction = await Transaction.findByIdAndDelete(
@@ -46,6 +72,7 @@ app.delete("/api/transactions/:id", async (req, res) => {
     res.status(500).json({ message: "Erro ao excluir transação." });
   }
 });
+
 app.listen(4040, () => {
   console.log("Server is running on port 4040");
 });

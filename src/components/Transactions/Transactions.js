@@ -13,7 +13,7 @@ const Transactions = () => {
 
   useEffect(() => {
     getTransactions().then(setTransactions);
-  }, []);
+  }, [transactions]);
 
   async function getTransactions() {
     const url = process.env.NEXT_PUBLIC_API_URL + "transactions";
@@ -85,7 +85,7 @@ const Transactions = () => {
         </select>
       </div>
       <h1
-        className={`${classes.value} ${
+        className={` ${classes.value} ${
           balance > 0 ? classes.valuePositive : classes.valueNegative
         }`}
       >

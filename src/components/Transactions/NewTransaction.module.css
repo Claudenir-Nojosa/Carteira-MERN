@@ -12,17 +12,6 @@
   border-radius: 5px;
   font-size: 1rem;
 }
-.formInput:hover {
-  width: 100%;
-  background-color: transparent;
-  color: #363636;
-  border: 2px solid #30313d;
-  padding: 2px 5px;
-  border-radius: 5px;
-  padding: 6px;
-  border-radius: 5px;
-  font-size: 1rem;
-}
 .formInputDate {
   color: #777;
   width: 100%;
@@ -30,6 +19,15 @@
   border: 2px solid #30313d;
   padding: 2px 5px;
   border-radius: 5px;
+  padding: 6px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.formInputDescription {
+  width: 100%;
+  background-color: transparent;
+  color: #363636;
+  border: 2px solid #30313d;
   padding: 6px;
   border-radius: 5px;
   font-size: 1rem;
@@ -61,7 +59,7 @@
   justify-content: center;
   font-size: 1.2rem;
   padding: 8px;
-  background: linear-gradient(135deg, #a7b2cf , #667db6);
+  background: linear-gradient(135deg, #a7b2cf, #667db6);
   cursor: pointer;
 }
 .budget {
@@ -77,4 +75,16 @@
   color: #777;
   font-weight: bold;
   font-size: 0.91rem;
+}
+@media (max-width: 768px) {
+  .formInput {
+    font-size: 0.7rem;
+    width: 80%;
+  }
+  .formInputDate {
+    font-size: 0.7rem;
+  }
+  .formInputDescription {
+    width: 100%;
+  }
 }

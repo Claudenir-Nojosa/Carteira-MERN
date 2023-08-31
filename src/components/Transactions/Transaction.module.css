@@ -33,3 +33,38 @@
   font-size: 1rem;
   color: #888;
 }
+
+@media (max-width: 768px) {
+  .transaction {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .transactionName {
+    font-size: 1.6rem;
+  }
+  .transactionDescription {
+    font-size: 1rem;
+    color: #888;
+    padding: 0.9rem 0;
+  }
+  .transactionPriceIncome {
+    color: #1c1c;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-top: 0.1rem;
+  }
+  .transactionPriceExpense {
+    color: #c11;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-top: 0.1rem;
+  }
+  .transactionDateTime {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    color: #888;
+  }
+}

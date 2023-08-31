@@ -34,30 +34,38 @@ const NewTransaction = () => {
       price: event.target.value,
     });
   };
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const url = process.env.NEXT_PUBLIC_API_URL + "transaction";
 
-    fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formInput.name,
-        price: formInput.price,
-        description: formInput.description,
-        date: formInput.date,
-      }),
-    }).then((response) => {
-      response.json().then((json) => {
-        console.log("result", json);
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formInput.name,
+          price: formInput.price,
+          description: formInput.description,
+          date: formInput.date,
+        }),
       });
-    });
-    setFormInput({
-      name: "",
-      price: "",
-      description: "",
-      date: "",
-    });
+
+      if (!response.ok) {
+        throw new Error("Erro ao enviar transação.");
+      }
+
+      const json = await response.json();
+      console.log("result", json);
+
+      setFormInput({
+        name: "",
+        price: "",
+        description: "",
+        date: "",
+      });
+    } catch (error) {
+      console.error("Erro ao processar a transação:", error.message);
+    }
   };
 
   return (
@@ -87,7 +95,7 @@ const NewTransaction = () => {
         </div>
         <div className={classes.description}>
           <input
-            className={classes.formInput}
+            className={classes.formInputDescription}
             type="text"
             onChange={handleDescriptionInputChange}
             value={formInput.description}
@@ -104,7 +112,9 @@ const NewTransaction = () => {
           Sua carteira atual
         </LinearGradient>
       </h3>
-      <p className={classes.advice}>Para excluir, basta clicar em cima do valor.</p>
+      <p className={classes.advice}>
+        Para excluir, basta clicar em cima do valor.
+      </p>
     </>
   );
 };
