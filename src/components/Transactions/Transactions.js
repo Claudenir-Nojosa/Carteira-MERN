@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Transaction from "./Transaction";
 import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+import { LinearGradient } from "react-text-gradients";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -70,18 +71,30 @@ const Transactions = () => {
     }
   };
   return (
-    <div>
-      <div>
-        <label>Filtrar por:</label>
-        <select value={filterType} onChange={handleFilterChange}>
+    <div className="text-center pt-4">
+      <h3 className="text-3xl">
+        <LinearGradient
+          gradient={["to left", "#667db6 ,#0082c8, #0082c8, #667db6"]}
+        >
+          Sua carteira atual
+        </LinearGradient>
+      </h3>
+      <p className="text-lg py-4">
+        Para excluir, basta clicar em cima do valor.
+      </p>
+      <div className="flex justify-start items-center">
+        <label className="block text-sm font-medium pr-4">
+          Filtrar por:
+        </label>
+        <select className=" border border-gray-300 text-sm rounded-lg p-1" value={filterType} onChange={handleFilterChange}>
           <option value="all">Todos</option>
           <option value="positive">Receitas</option>
           <option value="negative">Despesas</option>
         </select>
       </div>
-      <h1>
-        {balance}
-        <span>{cents}</span>
+      <h1 className={`py-24 text-6xl ${balance > 0 ? "text-green-800" : "text-red-600"}`}>
+        {balance.split(".")[0]}
+        <span className="text-lg px-2">.{cents}</span>
       </h1>
       {filteredTransactions.length > 0 &&
         filteredTransactions.map((transaction) => (
