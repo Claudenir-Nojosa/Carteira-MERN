@@ -6,7 +6,7 @@ import { LinearGradient } from "react-text-gradients";
 
 const HomePage = () => {
   return (
-    <main className="min-h-screen flex justify-top flex-col py-10 px-32 ">
+    <main className="min-h-screen flex justify-top flex-col py-8 px-32 ">
       <div className="text-center">
         <h1 className="text-6xl pb-7 font-bold">
           <LinearGradient
