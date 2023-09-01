@@ -1,4 +1,5 @@
 import ThemeSwitcher from "./ThemeSwitcher";
+import { AuthProvider } from "./authProvider";
 import "./globals.css";
 import Providers from "./providers";
 
@@ -11,10 +12,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Providers>
-          <ThemeSwitcher />
-          {children }
-        </Providers>
+        <AuthProvider>
+          <Providers>
+            <ThemeSwitcher />
+            {children}
+          </Providers>
+        </AuthProvider>
       </body>
     </html>
   );

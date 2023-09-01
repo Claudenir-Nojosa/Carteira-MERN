@@ -4,13 +4,21 @@ const cors = require("cors");
 require("dotenv").config();
 const Transaction = require("./models/transaction");
 const mongoose = require("mongoose");
+const { UserExists } = require("./userExists/route");
+const bcrypt = require("bcryptjs");
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.get("/api/test", (req, res) => {
@@ -27,25 +35,6 @@ app.post("/api/transaction", async (req, res) => {
     price,
   });
   res.json(transaction);
-});
-
-app.get("/api/test", (req, res) => {
-  res.json({ message: "Test ok" });
-});
-
-app.post("/api/transaction", async (req, res) => {
-  const { name, description, date, price } = req.body;
-  try {
-    const transaction = await Transaction.create({
-      name,
-      description,
-      date,
-      price,
-    });
-    res.json(transaction);
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao criar transação." });
-  }
 });
 
 app.get("/api/transactions", async (req, res) => {
@@ -72,6 +61,20 @@ app.delete("/api/transactions/:id", async (req, res) => {
     res.status(500).json({ message: "Erro ao excluir transação." });
   }
 });
+
+app.post("/api/register", async (req, res) => {
+  await mongoose.connect(process.env.MONGO_URL);
+  const { nameURL, email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = await Transaction.create({
+    nameURL,
+    email,
+    password: hashedPassword,
+  });
+  res.json(newUser);
+});
+
+app.post("/api/userExists", UserExists);
 
 app.listen(4040, () => {
   console.log("Server is running on port 4040");
