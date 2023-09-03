@@ -4,7 +4,6 @@ const cors = require("cors");
 require("dotenv").config();
 const Transaction = require("./models/transaction");
 const mongoose = require("mongoose");
-const { UserExists } = require("./userExists/route");
 const bcrypt = require("bcryptjs");
 
 mongoose.connect(process.env.MONGO_URL, {
@@ -14,7 +13,7 @@ mongoose.connect(process.env.MONGO_URL, {
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:4040",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
@@ -73,8 +72,6 @@ app.post("/api/register", async (req, res) => {
   });
   res.json(newUser);
 });
-
-app.post("/api/userExists", UserExists);
 
 app.listen(4040, () => {
   console.log("Server is running on port 4040");

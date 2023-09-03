@@ -1,36 +1,11 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const router = useRouter();
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (res.error) {
-        setError("Credenciais inválidas");
-        return;
-      }
-
-      router.replace("home");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
@@ -42,7 +17,7 @@ const Auth = () => {
           <p className="text-sm my-4  text-[#1F1F1F]">
             Se você já tem cadastro, faça o login
           </p>
-          <form onSubmit={submitHandler} className="flex flex-col gap-4">
+          <form className="flex flex-col gap-4">
             <input
               className="p-2 rounded-xl border outline-none text-gray-800/50"
               type="text"

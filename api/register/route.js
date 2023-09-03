@@ -21,3 +21,4 @@ module.exports.registerUser = async function (req) {
     );
   }
 };
+
