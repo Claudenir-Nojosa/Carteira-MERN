@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SignIn = () => {
   const [nameUser, setNameUser] = useState("");
@@ -16,24 +17,8 @@ const SignIn = () => {
       setError("Todos os campos são necessários.");
       return;
     }
-    const urlUserExists = process.env.NEXT_PUBLIC_API_URL + "userExists";
     const urlNewUser = process.env.NEXT_PUBLIC_API_URL + "register";
     try {
-      const resUserExists = await fetch(urlUserExists, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const { user } = await resUserExists.json();
-
-      if (user) {
-        setError("User already exists.");
-        return;
-      }
-
       const res = await fetch(urlNewUser, {
         method: "POST",
         headers: {
@@ -49,8 +34,9 @@ const SignIn = () => {
       if (res.ok) {
         const form = e.target;
         form.reset();
-        router.push("/");
+        router.replace("/");
       } else {
+        setError("Esse e-mail já possui cadastro.");
         console.log("User registration failed.");
       }
     } catch (error) {
@@ -95,6 +81,9 @@ const SignIn = () => {
               Cadastrar
             </button>
             {error && <p className="text-red-600">{error}</p>}
+            <div>
+              <p className="text-center text-sm" ><Link href='/'>Voltar para a tela de login.</Link></p>
+            </div>
           </form>
         </div>
       </div>

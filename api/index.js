@@ -5,19 +5,15 @@ require("dotenv").config();
 const Transaction = require("./models/transaction");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const User = require("./models/user");
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-app.use(
-  cors({
-    origin: "http://localhost:4040",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+app.use(cors());
+
 app.use(express.json());
 
 app.get("/api/test", (req, res) => {
@@ -62,15 +58,25 @@ app.delete("/api/transactions/:id", async (req, res) => {
 });
 
 app.post("/api/register", async (req, res) => {
-  await mongoose.connect(process.env.MONGO_URL);
-  const { nameURL, email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = await Transaction.create({
-    nameURL,
-    email,
-    password: hashedPassword,
-  });
-  res.json(newUser);
+  const { nameUser, email, password } = req.body;
+
+  const existingUser = await User.findOne({ email });
+
+  if (existingUser) {
+    return res.status(400).json({ message: "Email já cadastrado." });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({
+      nameUser,
+      email,
+      password: hashedPassword,
+    });
+    res.json(newUser);
+  } catch (error) {
+    res.status(500).json({ message: "Erro ao registrar usuário." });
+  }
 });
 
 app.listen(4040, () => {
