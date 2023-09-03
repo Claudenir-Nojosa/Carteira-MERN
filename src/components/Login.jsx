@@ -1,11 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
+import Cookie from 'js-cookie';
+import { useRouter } from "next/navigation";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter;
+
+  const loginHandler = () => {
+    Cookie.set('auth_token', 'aksdmaksmskf')
+    router.push('/home');
+  }
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
@@ -34,7 +42,7 @@ const Auth = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button className="bg-[#1F1F1F] dark:bg-gray-900 dark:text-gray-300 rounded-xl py-2 text-white hover:scale-105 duration-300">
+            <button onClick={loginHandler} className="bg-[#1F1F1F] dark:bg-gray-900 dark:text-gray-300 rounded-xl py-2 text-white hover:scale-105 duration-300">
               Login
             </button>
             {error && <p className="text-red-600">{error}</p>}
@@ -69,7 +77,7 @@ const Auth = () => {
         <div className="w-1/2 md:block hidden">
           <img
             className="rounded-xl"
-            src="https://images.unsplash.com/photo-1602742564213-4017d4f5d8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80"
+            src="https://raw.githubusercontent.com/Claudenir-Nojosa/servidor_estaticos/main/juan-manuel-merino-_Nd19leRtQc-unsplash.jpg"
             alt="#"
           />
         </div>
