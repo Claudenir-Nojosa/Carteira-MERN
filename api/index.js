@@ -6,6 +6,7 @@ const Transaction = require("./models/transaction");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const User = require("./models/user");
+const GoogleUser = require("./models/google-user");
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
@@ -58,7 +59,7 @@ app.delete("/api/transactions/:id", async (req, res) => {
 });
 
 app.post("/api/register", async (req, res) => {
-  const { nameUser, email, password } = req.body;
+  const { nameUser, email, name, password } = req.body;
 
   const existingUser = await User.findOne({ email });
 
@@ -73,27 +74,33 @@ app.post("/api/register", async (req, res) => {
       email,
       password: hashedPassword,
     });
-    res.json(newUser);
+    const newGoogleUser = await GoogleUser.create({
+      name,
+      email,
+    });
+
+    res.json({ newUser, newGoogleUser });
   } catch (error) {
     res.status(500).json({ message: "Erro ao registrar usuário." });
   }
 });
+
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
-  
+
   const existingUser = await User.findOne({ email });
 
-  if (!existingUser || email === '') {
-    return res.status(401).json({message: 'E-mail não encontrado'})
+  if (!existingUser || email === "") {
+    return res.status(401).json({ message: "E-mail não encontrado" });
   }
   const isPasswordValid = await bcrypt.compare(password, existingUser.password);
 
-  if (!isPasswordValid || password === '') {
-    return res.status(401).json({message: 'Senha incorreta'})
+  if (!isPasswordValid || password === "") {
+    return res.status(401).json({ message: "Senha incorreta" });
   }
 
-  res.json({message: 'Login bem sucedido!'})
-})
+  res.json({ message: "Login bem sucedido!" });
+});
 
 app.listen(4040, () => {
   console.log("Server is running on port 4040");

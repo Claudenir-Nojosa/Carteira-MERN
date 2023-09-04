@@ -1,15 +1,7 @@
 "use client";
-import { ThemeProvider } from "next-themes";
-import { useEffect, useState } from "react";
 
-export default function Providers({ children }) {
-  const [mounted, setMounted] = useState(false);
+import { SessionProvider } from "next-auth/react";
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!mounted) {
-    return <>{children}</>;
-  }
-  return <ThemeProvider attribute="class">{children}</ThemeProvider>;
-}
+export const NextAuthProvider = ({ children }) => {
+  return <SessionProvider>{children}</SessionProvider>;
+};

@@ -1,18 +1,58 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Cookie from 'js-cookie';
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter;
+  const router = useRouter();
 
-  const loginHandler = () => {
-    Cookie.set('auth_token', 'aksdmaksmskf')
-    router.push('/home');
+  const loginHandler = async (e) => {
+    e.preventDefault();
+
+    if (!email) {
+      setError("O E-mail não pode estar vazio");
+      return;
+    }
+    if (!password) {
+      setError("A senha não pode estar vazia.");
+      return;
+    }
+    const urlLogin = process.env.NEXT_PUBLIC_API_URL + "login";
+
+    try {
+      const res = await fetch(urlLogin, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      if (res.ok) {
+        const form = e.target;
+        form.reset();
+        console.log("Deu certo entrar");
+        Cookie.set('auth_token')
+        router.replace("/home");
+      } else {
+        setError("Credenciais Inválidas");
+        console.log("Erro ao entrar");
+      }
+    } catch (error) {
+      setError("Erro ao realizar Login");
+      console.log("Erro ao realizar Login", error);
+    }
+  };
+
+  const googleSignInHandler = () => {
+    signIn('google');
   }
 
   return (
@@ -25,7 +65,7 @@ const Auth = () => {
           <p className="text-sm my-4  text-[#1F1F1F]">
             Se você já tem cadastro, faça o login
           </p>
-          <form className="flex flex-col gap-4">
+          <form onSubmit={loginHandler} className="flex flex-col gap-4">
             <input
               className="p-2 rounded-xl border outline-none text-gray-800/50"
               type="text"
@@ -42,7 +82,10 @@ const Auth = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button onClick={loginHandler} className="bg-[#1F1F1F] dark:bg-gray-900 dark:text-gray-300 rounded-xl py-2 text-white hover:scale-105 duration-300">
+            <button
+              type="submit" // Adicione o type="submit" para o botão de login
+              className="bg-[#1F1F1F] dark:bg-gray-900 dark:text-gray-300 rounded-xl py-2 text-white hover:scale-105 duration-300"
+            >
               Login
             </button>
             {error && <p className="text-red-600">{error}</p>}
@@ -53,13 +96,12 @@ const Auth = () => {
             <p className="text-center text-sm">Ou</p>
             <hr className="border-gray-500" />
           </div>
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#1F1F1F]  dark:bg-gray-900 dark:text-gray-300">
+          <button onClick={googleSignInHandler} className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#1F1F1F]  dark:bg-gray-900 dark:text-gray-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
               fill="currentColor"
-              class="bi bi-google"
               viewBox="0 0 16 16"
               className="mr-5 "
             >
@@ -69,7 +111,7 @@ const Auth = () => {
           </button>
           <div className="text-xs flex justify-between items-center mt-11 flex-col text-[#1F1F1F]">
             <p>Se você não tem uma conta ainda...</p>
-            <button  className="py-1 mt-2 px-4 bg-white border rounded-xl  dark:bg-gray-900 dark:text-gray-300 hover:scale-110 duration-300">
+            <button className="py-1 mt-2 px-4 bg-white border rounded-xl  dark:bg-gray-900 dark:text-gray-300 hover:scale-110 duration-300">
               <a href="/signin">Cadastre-se</a>
             </button>
           </div>
