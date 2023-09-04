@@ -78,6 +78,22 @@ app.post("/api/register", async (req, res) => {
     res.status(500).json({ message: "Erro ao registrar usuário." });
   }
 });
+app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
+  
+  const existingUser = await User.findOne({ email });
+
+  if (!existingUser || email === '') {
+    return res.status(401).json({message: 'E-mail não encontrado'})
+  }
+  const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+
+  if (!isPasswordValid || password === '') {
+    return res.status(401).json({message: 'Senha incorreta'})
+  }
+
+  res.json({message: 'Login bem sucedido!'})
+})
 
 app.listen(4040, () => {
   console.log("Server is running on port 4040");
