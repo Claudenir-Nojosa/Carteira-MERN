@@ -1,6 +1,7 @@
+import { NextAuthProvider } from "./Providers";
 import ThemeSwitcher from "./ThemeSwitcher";
 import "./globals.css";
-import Providers from "./providers";
+import Providers from "./theme-provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,10 +12,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Providers>
-          <ThemeSwitcher />
-          {children}
-        </Providers>
+        <NextAuthProvider>
+          <Providers>
+            <ThemeSwitcher />
+            {children}
+          </Providers>
+        </NextAuthProvider>
       </body>
     </html>
   );
