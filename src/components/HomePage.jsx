@@ -4,10 +4,12 @@ import NewTransaction from "./Transactions/NewTransaction";
 import Transactions from "./Transactions/Transactions";
 import { LinearGradient } from "react-text-gradients";
 import Cookie from 'js-cookie';
+import { signOut } from "next-auth/react";
 
 const HomePage = () => {
 
-  const logoutHandler = () => {
+  const logoutHandler = async () => {
+    await signOut();
     Cookie.remove('auth_token')
   }
 

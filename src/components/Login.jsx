@@ -51,7 +51,9 @@ const Auth = () => {
     }
   };
 
-  const googleSignInHandler = () => {
+  const googleSignInHandler = async (e) => {
+    e.preventDefault();
+    Cookie.set('auth_token')
     signIn('google');
   }
 

@@ -9,31 +9,8 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }) {
-      if (account.provider === "google") {
-        const { name, email } = user;
-        try {
-          const res = await fetch("http://localhost:3000/api/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name,
-              email,
-            }),
-          });
-          console.log(name, email);
-          if (res.ok) {
-            console.log("Usuário registrado");
-            return user;
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
-      return user;
+    async redirect(url, baseUrl) {
+      return "/home";
     },
   },
 };

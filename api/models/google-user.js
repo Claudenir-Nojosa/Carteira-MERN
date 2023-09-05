@@ -10,7 +10,18 @@ const googleUserSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true, 
     },
+    password: String,
+    image: String,
+    role: {
+      type: String,
+      default: 'user'
+    },
+    provider: {
+      type: String,
+      default: 'credentials'
+    }
   },
   { timestamps: true }
 );
