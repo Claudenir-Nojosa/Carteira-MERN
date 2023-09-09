@@ -69,7 +69,7 @@ const Auth = () => {
           </p>
           <form onSubmit={loginHandler} className="flex flex-col gap-4">
             <input
-              className="p-2 rounded-xl border outline-none text-gray-800/50"
+              className="p-2 rounded-xl border outline-none text-gray-800/50 dark:text-gray-300"
               type="text"
               name="email"
               placeholder="Email"
@@ -77,7 +77,7 @@ const Auth = () => {
             />
             <div className="relative">
               <input
-                className="p-2 rounded-xl border w-full outline-none text-gray-800/50"
+                className="p-2 rounded-xl border w-full outline-none text-gray-800/50 dark:text-gray-300"
                 type="password"
                 name="password"
                 placeholder="Senha"
@@ -114,7 +114,7 @@ const Auth = () => {
           <div className="text-xs flex justify-between items-center mt-11 flex-col text-[#1F1F1F]">
             <p>Se você não tem uma conta ainda...</p>
             <button className="py-1 mt-2 px-4 bg-white border rounded-xl  dark:bg-gray-900 dark:text-gray-300 hover:scale-110 duration-300">
-              <a href="/signin">Cadastre-se</a>
+              <a href="/register">Cadastre-se</a>
             </button>
           </div>
         </div>

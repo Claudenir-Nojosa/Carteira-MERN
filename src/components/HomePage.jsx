@@ -31,7 +31,7 @@ const HomePage = () => {
           Insira abaixo a sua Receita/Despesa
         </p>
       </div>
-      <NewTransaction />
+      <NewTransaction/>
       <Transactions />
     </main>
   );
