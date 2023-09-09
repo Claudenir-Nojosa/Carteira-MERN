@@ -14,9 +14,9 @@ const HomePage = () => {
   }
 
   return (
-    <main className="min-h-screen flex justify-top flex-col py-8 px-32 bg-gray-50 dark:bg-gray-900">
+    <main className="min-h-screen flex justify-top flex-col py-8 sm:px-20 px-10 bg-gray-50 dark:bg-gray-900">
       <div className="text-center">
-        <h1 className="text-6xl pb-7 font-bold">
+        <h1 className=" sm:text-5xl text-3xl pb-7 font-bold">
           <LinearGradient
             gradient={["to left", "#667db6 ,#0082c8, #0082c8, #667db6"]}
           >
