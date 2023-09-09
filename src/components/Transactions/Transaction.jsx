@@ -8,7 +8,7 @@ const Transaction = ({ name, description, price, date, onDelete }) => {
     onDelete(_id);
   };
   return (
-    <div className="grid grid-cols-2 w-100 px-80 ">
+    <div className="grid grid-cols-2 w-100 xl:px-20 ">
       <div className="text-left text-2xl ">
         <div className="">{name}</div>
         <div className="py-1 text-gray-700/60 dark:text-gray-400 border-b-4">

@@ -34,9 +34,9 @@ const SignIn = () => {
       if (res.ok) {
         const form = e.target;
         form.reset();
-        router.replace("/");
+        router.replace("/home");
       } else {
-        setError("Esse e-mail já possui cadastro.");
+        setError("Email já cadastrado, tente outro.");
         console.log("User registration failed.");
       }
     } catch (error) {
@@ -56,14 +56,14 @@ const SignIn = () => {
           </p>
           <form onSubmit={submitHandler} className="flex flex-col gap-4">
             <input
-              className="p-2 rounded-xl border outline-none text-gray-800/50"
+              className="p-2 rounded-xl border outline-none text-gray-800/50 dark:text-gray-300"
               type="text"
               name="name"
               placeholder="Nome Completo"
               onChange={(e) => setNameUser(e.target.value)}
             />
             <input
-              className="p-2 rounded-xl border outline-none text-gray-800/50"
+              className="p-2 rounded-xl border outline-none text-gray-800/50 dark:text-gray-300"
               type="text"
               name="email"
               placeholder="Email"
@@ -71,7 +71,7 @@ const SignIn = () => {
             />
             <div className="relative">
               <input
-                className="p-2 rounded-xl border w-full outline-none text-gray-800/50"
+                className="p-2 rounded-xl border w-full outline-none text-gray-800/50 dark:text-gray-300"
                 type="password"
                 name="password"
                 placeholder="Senha"
@@ -83,7 +83,9 @@ const SignIn = () => {
             </button>
             {error && <p className="text-red-600">{error}</p>}
             <div>
-              <p className="text-center text-sm" ><Link href='/'>Voltar para a tela de login.</Link></p>
+              <p className="text-center text-sm dark:text-gray-900">
+                <Link href="/">Voltar para a tela de login.</Link>
+              </p>
             </div>
           </form>
         </div>
